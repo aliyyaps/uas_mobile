@@ -36,14 +36,14 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               width: 150,
               child: Image.asset(
-                'assets/stisla-light.png',
+                'assets/logo-light.png',
               ),
             ),
             const SizedBox(
               height: 16.0,
             ),
             const Text(
-              'STISLA',
+              "BIMA",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 32.0,
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 8.0,
             ),
             const Text(
-              'Modern mobile-apps to manage your life',
+              'Biodata Management Mobile-Apps',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w200,

@@ -77,7 +77,7 @@ class BiodataCard extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Image(
-                image: const AssetImage('assets/stisla.png'),
+                image: const AssetImage('assets/logo-filled.png'),
                 width: MediaQuery.of(context).size.width / 4,
               ),
             ),

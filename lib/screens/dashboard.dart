@@ -109,8 +109,9 @@ class _DashboardState extends State<Dashboard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CircleAvatar(
+                          backgroundColor: Colors.transparent,
                           backgroundImage:
-                              Image.asset('assets/stisla.png').image,
+                              Image.asset('assets/logo-filled.png').image,
                         ),
                         const Text(
                           'Dashboard',

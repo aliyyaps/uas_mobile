@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:uas_mobile/models/biodata.dart';
 import 'package:uas_mobile/screens/components/custom_radio.dart';
 import 'package:uas_mobile/screens/components/gender.dart';
+import 'package:uas_mobile/services/database_services.dart';
 
 class AddBioPage extends StatefulWidget {
   const AddBioPage({super.key});
@@ -21,7 +23,6 @@ class _AddBioPageState extends State<AddBioPage> {
   String? nimError;
   String? namaError;
   String? alamatError;
-  String? jkError;
   String? tgllahirError;
 
   @override
@@ -87,7 +88,7 @@ class _AddBioPageState extends State<AddBioPage> {
                               Icons.calendar_today,
                               color: Colors.grey[600],
                             ),
-                            errorText: namaError,
+                            errorText: tgllahirError,
                             errorStyle: const TextStyle(
                               fontSize: 16.0,
                             ),
@@ -98,6 +99,7 @@ class _AddBioPageState extends State<AddBioPage> {
                             ),
                           ),
                           onTap: () async {
+                            tgllahirError = null;
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
                               initialDate: DateTime.now(),
@@ -112,6 +114,8 @@ class _AddBioPageState extends State<AddBioPage> {
                               setState(() {
                                 tgllahirController.text = formattedDate;
                               });
+                            } else {
+                              tgllahirError = "Birth is required";
                             }
                           },
                         ),
@@ -166,8 +170,42 @@ class _AddBioPageState extends State<AddBioPage> {
                         const Size.fromHeight(50),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/');
+                    onPressed: () async {
+                      if (namaController.text.isEmpty) {
+                        setState(() {
+                          namaError = "Name is required";
+                        });
+                      }
+                      if (nimController.text.isEmpty) {
+                        setState(() {
+                          nimError = "Nim is required";
+                        });
+                      }
+                      if (alamatController.text.isEmpty) {
+                        setState(() {
+                          alamatError = "Address is required";
+                        });
+                      }
+                      if (tgllahirController.text.isEmpty) {
+                        setState(() {
+                          tgllahirError = "Birth is required";
+                        });
+                      }
+
+                      if (namaError == null &&
+                          nimError == null &&
+                          alamatError == null &&
+                          tgllahirError == null) {
+                        await DatabaseService().insertBiodata(Biodata(
+                            nim: int.parse(nimController.text),
+                            nama: namaController.text,
+                            alamat: alamatController.text,
+                            jenisKelamin: jk,
+                            tglLahir: tgllahirController.text));
+                        // var data = await DatabaseService().biodataList();
+                        // print(data.length);
+                        Navigator.pushNamed(context, '/');
+                      }
                     },
                     child: const Padding(
                       padding: EdgeInsets.all(16.0),
@@ -210,7 +248,7 @@ class _AddBioPageState extends State<AddBioPage> {
           icon,
           color: Colors.grey[600],
         ),
-        errorText: namaError,
+        errorText: error,
         errorStyle: const TextStyle(
           fontSize: 16.0,
         ),
@@ -221,7 +259,13 @@ class _AddBioPageState extends State<AddBioPage> {
       ),
       onTap: () {
         setState(() {
-          error = null;
+          if (hint == "Nama") {
+            namaError = null;
+          } else if (hint == "Nim") {
+            nimError = null;
+          } else {
+            alamatError = null;
+          }
         });
       },
     );

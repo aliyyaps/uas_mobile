@@ -96,14 +96,14 @@ class _DashboardState extends State<Dashboard> {
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.only(
-                  top: 50.0,
+                  top: 40.0,
                   right: 25.0,
                   left: 25.0,
                   bottom: 20.0,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -149,8 +149,9 @@ class _DashboardState extends State<Dashboard> {
                           child: Text(
                             isLoading ? 'Loading...' : 'user@gmail.com',
                             style: const TextStyle(
+                              fontSize: 14,
                               color: Colors.white,
-                              fontWeight: FontWeight.w100,
+                              fontWeight: FontWeight.w300,
                             ),
                           ),
                         ),

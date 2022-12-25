@@ -29,6 +29,14 @@ class DetailBioPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 32.0),
                   child: Column(
                     children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.0),
+                        child: CircleAvatar(
+                          radius: 72.0,
+                          backgroundImage: AssetImage('assets/foto-profil.png'),
+                          backgroundColor: Colors.transparent,
+                        ),
+                      ),
                       textFormFieldReadOnly(biodata!.nama, Icons.person),
                       const SizedBox(height: 16),
                       textFormFieldReadOnly(

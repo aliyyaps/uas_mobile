@@ -32,7 +32,7 @@ class BiodataCard extends StatelessWidget {
                 title: const Text('Delete'),
                 content: const Text('Are you sure to delete this item?'),
               )) {
-                deleteData();
+                deleteData(biodata);
               }
             },
             backgroundColor: Colors.red,

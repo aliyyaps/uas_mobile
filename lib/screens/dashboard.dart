@@ -21,12 +21,17 @@ class _DashboardState extends State<Dashboard> {
 
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
-   fetchData() async {
+  fetchData() async {
     final List<Biodata> bio = await DatabaseService().biodataList();
     setState(() {
       biodatas = bio;
       isLoading = false;
     });
+  }
+
+  delete(Biodata biodata) async {
+    await DatabaseService().delete(biodata);
+    fetchData();
   }
 
   @override
@@ -197,7 +202,7 @@ class _DashboardState extends State<Dashboard> {
                                   itemBuilder: (context, index) => BiodataCard(
                                     alertContext: _scaffoldkey.currentContext!,
                                     biodata: biodatas[index],
-                                    deleteData: () {},
+                                    deleteData: delete,
                                   ),
                                 ),
                               ),

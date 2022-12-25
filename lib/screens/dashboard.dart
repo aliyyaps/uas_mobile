@@ -3,6 +3,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:uas_mobile/models/biodata.dart';
 import 'package:uas_mobile/screens/add_bio.dart';
 import 'package:uas_mobile/screens/components/biodata_card.dart';
+import 'package:uas_mobile/services/database_services.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -12,48 +13,26 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  List<Biodata> biodatas = [
-    Biodata(
-        nim: 2041720115,
-        nama: "Aliyya",
-        alamat: "Sidoarjo",
-        jenisKelamin: "Perempuan",
-        tglLahir: "2002-08-23"),
-    Biodata(
-        nim: 2041720066,
-        nama: "Iqri",
-        alamat: "Sidoarjo",
-        jenisKelamin: "Perempuan",
-        tglLahir: "2002-04-04"),
-    Biodata(
-        nim: 2041720055,
-        nama: "Rifa",
-        alamat: "Sidoarjo",
-        jenisKelamin: "Perempuan",
-        tglLahir: "2002-01-07"),
-    Biodata(
-        nim: 2041720103,
-        nama: "Zalfa",
-        alamat: "Sidoarjo",
-        jenisKelamin: "Perempuan",
-        tglLahir: "2002-03-26"),
-    Biodata(
-        nim: 2041720133,
-        nama: "Zaidan",
-        alamat: "Sidoarjo",
-        jenisKelamin: "Laki-laki",
-        tglLahir: "2002-06-11"),
-  ];
+  List<Biodata> biodatas = [];
   int selectedIndex = 0;
-  bool isLoading = false;
+  bool isLoading = true;
 
   final ScrollController scrollController = ScrollController();
 
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
 
+   fetchData() async {
+    final List<Biodata> bio = await DatabaseService().biodataList();
+    setState(() {
+      biodatas = bio;
+      isLoading = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    fetchData();
   }
 
   @override

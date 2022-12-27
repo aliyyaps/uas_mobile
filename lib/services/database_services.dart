@@ -73,7 +73,8 @@ class DatabaseService {
     // Convert the List<Map<String, dynamic> into a List<Breed>.
     return List.generate(maps.length, (index) => Biodata.fromMap(maps[index]));
   }
-   Future<void> delete(Biodata biodata) async {
+
+  Future<void> delete(Biodata biodata) async {
     final db = await _databaseService.database;
 
     db.delete('biodata', where: 'id = ?', whereArgs: [biodata.id]);

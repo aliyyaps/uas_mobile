@@ -15,6 +15,8 @@ class Biodata {
     required this.tglLahir,
   });
 
+  // Untuk mengkonversi object menjadi json
+  // Karena SQLite berkomunikasi lewat json baik diterima atau dikirim
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
 
@@ -28,6 +30,7 @@ class Biodata {
     return result;
   }
 
+  // Untuk mengkonversi json menjadi object
   factory Biodata.fromMap(Map<String, dynamic> map) {
     return Biodata(
       id: map['id'],

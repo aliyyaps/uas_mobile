@@ -26,7 +26,7 @@ class DetailBioPage extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 32.0),
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Column(
                     children: [
                       const Padding(
